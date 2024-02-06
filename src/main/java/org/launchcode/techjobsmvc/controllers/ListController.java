@@ -23,21 +23,25 @@ public class ListController {
 
     public ListController () {
         columnChoices.put("all", "All");
+        columnChoices.put("name", "Name");
         columnChoices.put("employer", "Employer");
         columnChoices.put("location", "Location");
         columnChoices.put("positionType", "Position Type");
         columnChoices.put("coreCompetency", "Skill");
 
+        tableChoices.put("all", "View All");
+        tableChoices.put("name", JobData.getAllNames());
         tableChoices.put("employer", JobData.getAllEmployers());
         tableChoices.put("location", JobData.getAllLocations());
         tableChoices.put("positionType", JobData.getAllPositionTypes());
         tableChoices.put("coreCompetency", JobData.getAllCoreCompetency());
     }
 
-    @GetMapping(value = "")
+    @GetMapping("")
     public String list(Model model) {
         model.addAttribute("columns", columnChoices);
         model.addAttribute("tableChoices", tableChoices);
+        model.addAttribute("names", JobData.getAllNames());
         model.addAttribute("employers", JobData.getAllEmployers());
         model.addAttribute("locations", JobData.getAllLocations());
         model.addAttribute("positions", JobData.getAllPositionTypes());
@@ -46,7 +50,7 @@ public class ListController {
         return "list";
     }
 
-    @GetMapping(value = "jobs")
+    @GetMapping("jobs")
     public String listJobsByColumnAndValue(Model model, @RequestParam String column, @RequestParam(required = false) String value) {
         ArrayList<Job> jobs;
         if (column.equals("all")){
@@ -61,4 +65,3 @@ public class ListController {
         return "list-jobs";
     }
 }
-
