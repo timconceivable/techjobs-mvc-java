@@ -50,7 +50,7 @@ public class Job {
         }
 
         output = String.format("\nID: %d\n" +
-                "Name: %s\n" +
+                "Title: %s\n" +
                 "Employer: %s\n" +
                 "Location: %s\n" +
                 "Position Type: %s\n" +

@@ -8,10 +8,10 @@
 
 <div class="container body-content">
 
-  <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
+  <h2 th:text="${title}"></h2>
 
   <form th:action="@{/search/results}" method = "post">
-    <h2>Search by:</h2>
+    <h3>Search by:</h3>
 
     <p>
             <span th:each="column : ${columns}">
@@ -20,10 +20,9 @@
                         name="searchType"
                         th:id="${column.key}"
                         th:value="${column.key}"
-                        th:checked="${column.key == 'all'}"/>
+                        th:checked="${column.key == searchType}"/>
                 <label th:for="${column.key}" th:text="${column.value}"></label>
             </span>
-
     </p>
 
     <p>
@@ -41,27 +40,27 @@
         <table class="job-listing">
             <tr>
                 <td>ID</td>
-                <td th:text="${job.id}">MISSING DATA</td>
+                <td th:text="${job.id}">JOB ID</td>
             </tr>
             <tr>
-                <td>Name</td>
-                <td th:text="${job.name}">MISSING DATA</td>
+                <td>Title</td>
+                <td><a th:href="${'/list/jobs?column=name&value=' + job.name}" th:text="${job.name}">JOB TITLE</a></td>
             </tr>
             <tr>
                 <td>Employer</td>
-                <td th:text="${job.employer}">MISSING DATA</td>
+                <td><a th:href="${'/list/jobs?column=employer&value=' + job.employer}" th:text="${job.employer}">EMPLOYER</a></td>
             </tr>
             <tr>
                 <td>Location</td>
-                <td th:text="${job.location}">MISSING DATA</td>
+                <td><a th:href="${'/list/jobs?column=location&value=' + job.location}" th:text="${job.location}">LOCATION</a></td>
             </tr>
             <tr>
                 <td>Position Type</td>
-                <td th:text="${job.positionType}">MISSING DATA</td>
+                <td><a th:href="${'/list/jobs?column=positionType&value=' + job.positionType}" th:text="${job.positionType}">POSITION TYPE</a></td>
             </tr>
             <tr>
                 <td>Skill</td>
-                <td th:text="${job.coreCompetency}">MISSING DATA</td>
+                <td><a th:href="${'/list/jobs?column=coreCompetency&value=' + job.coreCompetency}" th:text="${job.coreCompetency}">CORE SKILL</a></td>
             </tr>
         </table>
     </th:block>

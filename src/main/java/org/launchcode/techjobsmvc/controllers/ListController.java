@@ -23,7 +23,7 @@ public class ListController {
 
     public ListController () {
         columnChoices.put("all", "All");
-        columnChoices.put("name", "Name");
+        columnChoices.put("name", "Title");
         columnChoices.put("employer", "Employer");
         columnChoices.put("location", "Location");
         columnChoices.put("positionType", "Position Type");
@@ -58,7 +58,7 @@ public class ListController {
             model.addAttribute("title", "All Jobs");
         } else {
             jobs = JobData.findByColumnAndValue(column, value);
-            model.addAttribute("title", "Jobs with " + columnChoices.get(column) + ": " + value);
+            model.addAttribute("title", "Jobs with \"" + value + "\" in " + columnChoices.get(column));
         }
         model.addAttribute("jobs", jobs);
 
