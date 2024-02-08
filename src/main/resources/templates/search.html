@@ -15,12 +15,18 @@
 
     <p>
             <span th:each="column : ${columns}">
-                <input
+                <input th:if="${#strings.isEmpty(searchType)}"
                         type="radio"
                         name="searchType"
                         th:id="${column.key}"
                         th:value="${column.key}"
-                        th:checked="${column.key == searchType}"/>
+                        th:checked="${column.key == 'all'}"/>
+                <input th:unless="${#strings.isEmpty(searchType)}"
+                       type="radio"
+                       name="searchType"
+                       th:id="${column.key}"
+                       th:value="${column.key}"
+                       th:checked="${column.key == searchType}"/>
                 <label th:for="${column.key}" th:text="${column.value}"></label>
             </span>
     </p>
@@ -60,7 +66,7 @@
             </tr>
             <tr>
                 <td>Skill</td>
-                <td><a th:href="${'/list/jobs?column=coreCompetency&value=' + job.coreCompetency}" th:text="${job.coreCompetency}">CORE SKILL</a></td>
+                <td><a th:href="${'/list/jobs?column=coreCompetency&value=' + job.coreCompetency}" th:text="${job.coreCompetency}">SKILL</a></td>
             </tr>
         </table>
     </th:block>

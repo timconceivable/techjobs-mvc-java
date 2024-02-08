@@ -18,16 +18,17 @@ import static org.launchcode.techjobsmvc.controllers.ListController.columnChoice
  */
 @Controller
 @RequestMapping("search")
-public class SearchController {
+public class SearchController extends TechJobsController {
 
-    @GetMapping()
+    @GetMapping(value = "")
     public String search(Model model) {
         model.addAttribute("columns", columnChoices);
+
         return "search";
     }
 
     // TODO #3 - Create a handler to process a search request and render the updated search view.
-    @PostMapping("results")
+    @PostMapping(value = "results")
     public String displaySearchResults(Model model, @RequestParam(required = false) String searchType, @RequestParam(required = false) String searchTerm) {
         ArrayList<Job> jobs;
         if (isNull(searchType) || (searchType.equals("all") && (isNull(searchTerm) || searchTerm.isBlank() ) )) {
@@ -37,8 +38,10 @@ public class SearchController {
             jobs = JobData.findByColumnAndValue(searchType, searchTerm);
             model.addAttribute("title", "Jobs with \"" + searchTerm + "\" in " + columnChoices.get(searchType));
         }
-        model.addAttribute("columns", columnChoices);
         model.addAttribute("jobs", jobs);
+        model.addAttribute("columns", columnChoices);
+        model.addAttribute("searchType", searchType);
+        model.addAttribute("searchTerm", searchTerm);
 
         return "search";
     }
